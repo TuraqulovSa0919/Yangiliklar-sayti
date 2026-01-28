@@ -1,0 +1,18 @@
+{% extends 'news/base.html' %}
+
+{% block content %}
+    
+    <h2>Qidiruv natijalari: </h2><br>
+        
+        {% for yangilik in barcha_yangiliklar %}
+            <h3>
+                <a style="color: blue;" href="{% url 'news_detail_page' yangilik.slug %}" class="danger" >{{ yangilik.title }}</a>
+                {% if yangilik.image %}
+                <p><img src="{{ yangilik.image.url }}" width="30%"></p>
+                {% endif %}
+                <p style="color: rgb(122, 79, 53);">{{ yangilik.body| truncatewords:23 }}</p>
+            </h3>
+
+        {% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,78 @@
+{% extends 'news/base.html' %}
+
+{% load static %}
+
+{% block title %} Foydalanuchi profili {% endblock title %}
+
+{% block content %}
+    <div>
+    <h3>Xush kelibsiz {{ user.username }} !</h3>
+    <h2>Siz haqingizdagi ma'lumotlar</h2>
+    <img src="{{ profile.photo.url }}"width=50%>
+    <h4>Tug'ilgan yilingiz: {{ profile.date_of_birth }}</h4>
+    <label style="padding: 10px;">Username:</label><input value="{{ user.username }}" readonly placeholder="kiritilmagan"><br>
+    <label style="padding: 10px;">Emailingiz:</label><input value="{{ user.email }}" readonly placeholder="kiritilmagan"><br>
+    <label style="padding: 10px;">Ismingiz:</label><input value="{{ user.first_name }}" readonly placeholder="kiritilmagan"><br>
+    <label style="padding: 10px;">Familiyangiz:</label><input value="{{ user.last_name }}" readonly placeholder="kiritilmagan"><br>
+    </div>
+    <div style="text-align: center; margin-bottom: 15px;">
+    <a href="{% url 'home_page' %}" 
+       style="display: inline-block; 
+              padding: 6px 15px; /* kichikroq padding */
+              margin: 0 8px; 
+              color: white; 
+              background-color: red; 
+              text-decoration: none; 
+              border-radius: 5px; 
+              font-weight: bold; 
+              font-size: 1em; /* h5 dan biroz kichikroq, matn kichik qolmasin */
+              transition: 0.3s;">
+        Bosh sahifa
+    </a>
+
+    <a href="{% url 'password_change' %}" 
+       style="display: inline-block; 
+              padding: 6px 15px; 
+              margin: 0 8px; 
+              color: white; 
+              background-color: red; 
+              text-decoration: none; 
+              border-radius: 5px; 
+              font-weight: bold; 
+              font-size: 1em; 
+              transition: 0.3s;">
+        Parolni almashtirish
+    </a>
+             
+    <a href="{% url 'log_out' %}" 
+       style="display: inline-block; 
+              padding: 6px 15px; 
+              margin: 0 8px; 
+              color: white; 
+              background-color: red; 
+              text-decoration: none; 
+              border-radius: 5px; 
+              font-weight: bold; 
+              font-size: 1em; 
+              transition: 0.3s;">
+        Hisobdan chiqish
+    </a>
+    <a href="{% url 'edit_user_information' %}" 
+       style="display: inline-block; 
+              padding: 6px 15px; 
+              margin: 0 8px; 
+              color: white; 
+              background-color: red; 
+              text-decoration: none; 
+              border-radius: 5px; 
+              font-weight: bold; 
+              font-size: 1em; 
+              transition: 0.3s;">
+        Hisobdan chiqish
+    </a>
+</div>
+
+
+{% endblock content %}
+
+

@@ -1,0 +1,40 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %}Biz haqimizda{% endblock title %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <h1 class="text-center mb-4">Biz haqimizda</h1>
+            <p class="lead text-center">
+                Bizning yangiliklar saytimiz sizga eng so‘nggi, ishonchli va qiziqarli yangiliklarni taqdim etadi. 
+                Maqsadimiz — sizni dunyodagi muhim voqealar bilan tezkor va aniq tanishtirish.
+            </p>
+            <hr class="my-4">
+            <h3>Bizning missiyamiz</h3>
+            <p>
+                Ommaviy axborot vositalari orqali jamiyatga ijobiy ta’sir ko‘rsatish va
+                har bir foydalanuvchiga dolzarb yangiliklarni yetkazish.
+            </p>
+
+            <h3>Bizning jamoa</h3>
+            <p>
+                Saytimiz tajribali jurnalistlar, muharrirlar va IT mutaxassislaridan tashkil topgan. 
+                Har bir a’zomiz yangilikni tekshirib, sizga eng aniq ma’lumotni taqdim etishga harakat qiladi.
+            </p>
+
+            <h3>Aloqa</h3>
+            <p>
+                Agar sizda savollar, takliflar yoki hamkorlik bo‘yicha murojaatlaringiz bo‘lsa, 
+                biz bilan <a href="{% url 'contact_page' %}">aloqa sahifasi</a> orqali bog‘laning.
+            </p>
+
+            <div class="text-center mt-5">
+                <img src="{% static 'images/about_us.jpg' %}" alt="Biz haqimizda" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

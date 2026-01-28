@@ -1,0 +1,25 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div>
+        {% for news in mahalliy_yangiliklar %}
+            <div class="news-item" style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+                
+                <!-- Sarlavha -->
+                <h2>{{ news.title }}</h2>
+                
+                <!-- Rasm -->
+                {% if news.image %}
+                    <img src="{{ news.image.url }}" alt="{{ news.title }}" 
+                        style="max-width: 100%; height: auto; display: block; margin-bottom: 10px;">
+                {% endif %}
+                
+                <!-- Matn truncatewords bilan -->
+                <p>{{ news.body|truncatewords:30 }}</p>
+                
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}

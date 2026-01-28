@@ -1,0 +1,38 @@
+{% extends 'news/base.html' %}
+
+{% block title %} Admin sahifasi {% endblock title %}
+
+{% block content %}
+
+<h1 class="mb-4">Sayt administratorlari ro'yxati</h1>
+
+<table class="table table-bordered table-hover text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Foydalanuvchi nomi</th>
+            <th>Email</th>
+            <th>Oxirgi kirish</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for admin in admin_users %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ admin.username }}</td>
+            <td>{{ admin.email|default:"—" }}</td>
+            <td>{{ admin.last_login|date:"d.m.Y H:i"|default:"—" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Administratorlar topilmadi</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h2> 
+    <a href="{% url 'news_create' %}" class="text-primary">
+        Yangilik qo'shish 
+    </a>
+</h2>
+{% endblock content %}

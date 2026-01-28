@@ -1,0 +1,17 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h2>Veb saytga kirish - login</h2>
+    <p>Iltimos, saytga kirish uchun quyidagi formani to'ldiring!</p>
+    <h5>Agar parolingizni unutgan bo'lsangiz uni <a href="{% url 'password_reset' %}" style="color: blue;">tiklang</a></h5>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+    </form>
+    <h4>Agar registiratsiyadan o'tmagan bo'lsangiz <a href="{% url 'user_register' %}" style="color: blue;">ro'yxatdan o'tish</a>👈 ni bosing</h4>
+
+{% endblock content %}
+

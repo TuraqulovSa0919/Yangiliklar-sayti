@@ -1,0 +1,217 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% load hitcount_tags %}
+
+
+{% block title %} {{ news.title }} {% endblock title %}
+
+{% block content %}
+  <h1>{{ news.title }}</h1>
+  <h5>{{ news.publish_time }} | <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for news %} | Comments: {{ comment_count }}</h5>
+
+  {% if news.image %}
+    <img src="{{ news.image.url }}" alt="" style="max-width: 500px;">
+  {% endif %}
+
+  <p>{{ news.body }}</p>
+
+  {% if user.is_authenticated and request.user.is_superuser %}
+    <div class="card-footer text-center">
+      <a href="{% url 'news_update' news.slug %}">Tahrirlash</a> |
+      <a href="{% url 'news_delete' news.slug %}">O'chirish</a>
+    </div>
+  {% endif %}
+  <br>
+
+  <!-- ✅ YOUTUBE-STYLE COMMENTS (bitta dona) -->
+  <div class="comments-card" style="margin-top: 20px;">
+
+    <!-- Header -->
+    <button type="button" class="comments-header" id="toggle-comments">
+      <span class="comments-title">Fikrlar</span>
+      <span class="comments-count">{{ comments|length }}</span>
+      <span class="comments-chevron" id="comments-chevron">▾</span>
+    </button>
+    <div>
+      <h4 class="comment-count-text"> Bu yangilikga {{ comment_count }} ta izoh yozilgan</h4>
+        <style>
+          .comment-count-text {
+            
+            margin-bottom: 50px;
+
+          }
+        </style>
+
+      
+
+    </div>
+
+    <!-- Body (collapse) -->
+    <div class="comments-body" id="comments-body">
+
+      <!-- Form yoki login warning -->
+      {% if user.is_authenticated %}
+        <div class="comment-box">
+          <h3 style="margin: 0 0 10px 0;">Izoh qoldirish</h3>
+
+          <form method="POST" style="margin-top: 1.0em;">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <div class="comment-actions">
+              <button type="submit" class="btn btn-primary btn-sm">Yuborish</button>
+            </div>
+          </form>
+        </div>
+      {% else %}
+        <div class="comment-login-warning">
+          <p class="text-danger mb-1">Faqatgina ro'yhatdan o'tgan foydalanuvchilar izoh qoldirishi mumkin</p>
+          <p class="mb-0">
+            Izoh qoldirish uchun
+            <a href="{% url 'user_register' %}" style="color: green;">ro'yhatdan o'ting</a>
+            yoki
+            <a href="{% url 'login' %}" style="color: blue;">saytga kiring</a>
+          </p>
+        </div>
+      {% endif %}
+
+      <!-- Comments list -->
+      <div class="comments-list">
+        {% for comment in comments %}
+          <div class="comment-item">
+            <div class="comment-meta">
+              <strong class="comment-user">{{ comment.user }}</strong>
+              {% if comment.created_time %}
+                <span class="comment-time">{{ comment.created_time|date:"d M Y, H:i" }}</span>
+              {% endif %}
+            </div>
+            <div class="comment-body-text">{{ comment.body|linebreaksbr }}</div>
+          </div>
+        {% empty %}
+          <p class="text-muted mb-0">Hozircha izohlar yo‘q.</p>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    .comments-card{
+      border: 1px solid #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .comments-header{
+      width: 100%;
+      border: 0;
+      padding: 14px 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+      background: #9f9f7a;          /* 🔹 ajralib turadigan fon */
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 35px;
+    }
+    .comments-header:hover{
+      background: #ece6e6;
+    }
+
+    .comments-title{ font-weight: 700; }
+    .comments-count{
+      background: #e9e9e9;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .comments-chevron{
+      margin-left: auto;
+      transition: transform .2s ease;
+      font-size: 18px;
+    }
+
+    .comments-body{
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .25s ease;
+      padding: 0 16px;
+    }
+
+    .comments-body.open{
+      padding: 16px;
+    }
+
+    .comment-box{
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    .comment-actions{ text-align: right; }
+
+    .comments-list{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .comment-item{
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 10px;
+    }
+
+    .comment-item:last-child{
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .comment-meta{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .comment-time{
+      color: #777;
+      font-size: 12px;
+    }
+
+    .comment-body-text{
+      font-size: 14px;
+    }
+  </style>
+
+  <script>
+    const toggleBtn = document.getElementById("toggle-comments");
+    const body = document.getElementById("comments-body");
+    const chevron = document.getElementById("comments-chevron");
+
+    function setClosed(){
+      body.style.maxHeight = "0px";
+      body.classList.remove("open");
+      chevron.style.transform = "rotate(0deg)";
+    }
+
+    function setOpen(){
+      body.classList.add("open");
+      body.style.maxHeight = body.scrollHeight + "px";
+      chevron.style.transform = "rotate(180deg)";
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      const isOpen = body.classList.contains("open");
+      if (isOpen) setClosed();
+      else setOpen();
+    });
+
+    // Agar form validatsiya xatolari bilan qaytsa, ochiq tursin
+    window.addEventListener("load", () => {
+      const hasErrors = document.querySelector(".errorlist");
+      if (hasErrors) setOpen();
+    });
+  </script>
+
+{% endblock content %}
