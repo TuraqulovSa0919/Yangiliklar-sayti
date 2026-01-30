@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-30 20:46+0500\n"
+"PO-Revision-Date: 2026-01-30 21:00+0500\n"
+"Last-Translator: Admin <admin@example.com>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\config\settings.py:123
+msgid "Uzbek"
+msgstr "Uzbek"
+
+#: .\config\settings.py:124
+msgid "English"
+msgstr "English"
+
+#: .\config\settings.py:125
+msgid "Russian"
+msgstr "Russian"
+
+#: .\templates\news\index.html:7
+msgid " Bosh sahifa "
+msgstr " Home "
+
+#: .\templates\news\index.html:31
+msgid " So'ngi yangiliklar "
+msgstr " Latest news "
+
+#: .\templates\news\index.html:57
+msgid " Mahalliy "
+msgstr " Local "
+
+#: .\templates\news\index.html:94
+msgid " Xorij Xabarlari "
+msgstr " International news "
+
+#: .\templates\news\index.html:125
+msgid " Texnologiya "
+msgstr " Technology "
+
+#: .\templates\news\index.html:156
+msgid " Fotoxabarlar "
+msgstr " Photo news "
+
+#: .\templates\news\index.html:208 .\templates\news\index.html:267
+msgid " Ommabop "
+msgstr " Popular "
+
+#: .\templates\news\index.html:270
+msgid " Barcha kategoriyalar "
+msgstr " All categories "
+
+#: .\templates\news\index.html:272
+msgid " Kategoriyani tanlang "
+msgstr " Select a category "
+
+#: .\templates\news\index.html:282
+msgid " Blog "
+msgstr " Blog "
+
+#: .\templates\news\index.html:283
+msgid " Rss Feed "
+msgstr " RSS Feed "
+
+#: .\templates\news\index.html:284
+msgid " Login "
+msgstr " Login "
